@@ -24,6 +24,6 @@ class Team(models.Model):
 
 
 class Tournament(models.Model):
-    tournament_id = models.CharField(max_length=128, null=True, blank=True)
-    title = models.CharField(max_length=128, null=True, blank=True)
+    tournament_id = models.CharField(max_length=128)
+    title = models.CharField(max_length=128)
     teams = models.ForeignKey(Team, verbose_name='Teams')
