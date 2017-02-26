@@ -5,6 +5,9 @@
   </head>
   <body>
     <h1>SOME SHIT</h1>
+    {% if registered == True %}
+        <h3> Thank you {{ team_name }}</h3>
+    {% endif %}
     <form action="" method="post">
       {% csrf_token %}
       {{ form.as_p }}
