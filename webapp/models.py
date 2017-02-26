@@ -16,7 +16,7 @@ class UserProfile(models.Model):
 
     
 class Team(models.Model):
-    team_id = models.CharField(max_length=128, null=True, blank=True)
+    team_id = models.CharField(max_length=128, blank=True, null=True)
     name = models.CharField(max_length=128, null=True, blank=True)
     players = models.ManyToManyField(UserProfile)
     team_wins = models.IntegerField(null=True, blank=True)
@@ -24,6 +24,6 @@ class Team(models.Model):
 
 
 class Tournament(models.Model):
-    tournament_id = models.CharField(max_length=128)
+    tournament_id = models.CharField(max_length=128, blank=True, null=True)
     title = models.CharField(max_length=128)
-    teams = models.ForeignKey(Team, verbose_name='Teams')
+    teams = models.ForeignKey(Team, verbose_name='Teams',null=True)
