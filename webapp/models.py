@@ -13,6 +13,12 @@ class UserProfile(models.Model):
     date_joined = models.DateTimeField(datetime.now())
     username = models.CharField(max_length=128, default=lol_summoner_name)
     lol_mmr = models.IntegerField(null=True, blank=True)
+    
+    def __str__(self):
+      return self.user
+    
+    def __unicode__(self):
+      return self.user
 
     
 class Team(models.Model):
@@ -21,9 +27,21 @@ class Team(models.Model):
     players = models.ManyToManyField(UserProfile)
     team_wins = models.IntegerField(null=True, blank=True)
     team_losses = models.IntegerField(null=True, blank=True)
+    
+    def __str__(self):
+      return self.name
+    
+    def __unicode__(self):
+      return self.name
 
 
 class Tournament(models.Model):
     tournament_id = models.CharField(max_length=128, blank=True, null=True)
     title = models.CharField(max_length=128)
     teams = models.ForeignKey(Team, verbose_name='Teams',null=True)
+    
+    def __str__(self):
+      return self.title
+    
+    def __unicode__(self):
+      return self.title

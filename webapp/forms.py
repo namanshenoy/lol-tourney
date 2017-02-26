@@ -4,4 +4,4 @@ from models import *
 class TournamentForm(forms.ModelForm):
   class Meta:
     model = Tournament
-    exclude = ['teams']
+    exclude = ['tournament_id','teams']
