@@ -8,6 +8,9 @@
 {% if registered == True %}
     <h3> Thank you {{ team_name }}</h3>
 {% endif %}
+{% if user_profile %}
+<h1>Your MMR = {{ user_profile.MMR }}</h1>
+{% endif %}
 <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
