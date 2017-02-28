@@ -1,10 +1,11 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from forms import *
 
 
 # Create your views here.
 
-
+@login_required
 def index(request):
     context = {}
     if request.POST:

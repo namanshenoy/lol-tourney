@@ -1,19 +1,42 @@
-<!DOCTYPE html>
+<!DOCTYPE html> {% load static %}
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Team Maker</title>
+  <meta charset="UTF-8">
+  <title>Team Maker</title>
+  <link rel="stylesheet" href="{% static 'css/content.css' %}">
 </head>
-<body>
-    <h1>Login</h1>
-        <form method="post" action=".">
-                {% csrf_token %}
-                {{ form.as_p }}
 
-                <input type="submit" value="Log in" />
-                <input type="hidden" name="next" value="{{ next }}" />
-                </form>
+<body style="background-image: url('{% static 'images/background.png' %}')" ;>
+  <div id="login_menu">
+    <p id="login_text">Login</p>
+    <form id="login_form" method="post" action=".">
+      {% csrf_token %}
+      <table>
+        <tr>
+          <td><input type="text" id="id_username" placeholder="username" autofocus/></td>
+        </tr>
+        <tr>
+          <td><br></td>
+        </tr>
+        <tr>
+          <td><input type="password" id="id_password" placeholder="password" /></td>
+        </tr>
+        <tr>
+          <td><button type="submit" id="submit" value="Log in">Log In</button><a id="register"  href="{% url 'registration_register' %}"><button value="Register">Register</button></a></td>
+        </tr>
 
-        <p>Not  a member? <a href="{% url 'registration_register' %}">Register</a>!</p>
+        <tr>
+          <td></td>
+          </td>
+        </tr>
+
+        <tr>
+          <td><input type="hidden" name="next" value="{{ next }}" /></td>
+        </tr>
+      </table>
+    </form>
+  </div>
 </body>
+
 </html>
