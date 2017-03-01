@@ -20,3 +20,5 @@ def index(request):
     else:
         form = TournamentForm()
         return render(request, 'index.html', {'form': form, })
+      
+

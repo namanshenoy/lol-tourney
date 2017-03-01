@@ -42,7 +42,7 @@ body {
   margin-left: 3vw;
 }
 
-#login_form button {
+#login_form .login-button {
   margin-top: 1.5vw;
   font-family: 'league';
   font-size: 1.2vw;
@@ -50,15 +50,13 @@ body {
   width: 8vw;
   height: 2.5vw;
   color: #706206;
-  margin-left: 7vw;
+  margin-left: 12vw;
 }
 
-#register {
-  margin-left:-30px
-}
 
 #login_form input {
   padding-left: .5vw;
+  margin-top: 1vw;
   font-size: 1.5vw;
   font-family: 'league';
   width: 28vw;
