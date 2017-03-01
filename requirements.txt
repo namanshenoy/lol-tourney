@@ -1,0 +1,5 @@
+Django==1.10.2
+django-registration-redux==1.4
+lxml==3.7.3
+pytz==2016.10
+requests==2.13.0
