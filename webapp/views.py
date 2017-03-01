@@ -57,8 +57,9 @@ def settings(request):
 		form = UserProfileForm(request.POST)
 		if form.is_valid():
 			saved = form.save(commit=False)
-			user_profile = UserProfile.objects.get_or_create(user=request.user)
+			user_profile, found = UserProfile.objects.get_or_create(user=request.user)
 			user_profile.user = request.user
+			user_profile.lol_summoner_name = saved.lol_summoner_name
 			mmr = get_mmr(saved.lol_summoner_name)
 			print mmr
 			if mmr < 0:
@@ -69,7 +70,7 @@ def settings(request):
 			user_profile.date_joined = pytz.utc.localize(datetime.now())
 			user_profile.save()
 			return HttpResponseRedirect('/')
-	if UserProfile.objects.exists(user=request.user):
+	if UserProfile.objects.filter(user=request.user).exists():
 		form = UserProfileForm(instance=UserProfile.objects.get(user=request.user))
 	else:
 		form = UserProfileForm()
