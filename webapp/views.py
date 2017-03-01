@@ -1,6 +1,11 @@
+<<<<<<< HEAD
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+=======
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+>>>>>>> 5b3c1e1eebe5aee42e07b8e5c19a707eb522d892
 from forms import *
 from lxml import html
 import requests

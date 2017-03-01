@@ -1,0 +1,67 @@
+@font-face {
+  font-family: 'league';
+  src: url('../fonts/league.ttf');
+}
+
+body {
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#login_menu {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 40vw;
+  height: 30vw;
+  background: rgba(63, 62, 80, 0.9);
+  border: solid 3px #706206;
+  box-shadow: 0px 0px 50px rgba(178, 158, 47, 0.8);
+  border-radius: 10px;
+}
+
+#login_text {
+  margin-top: 0vw;
+  text-align: center;
+  font-family: 'league';
+  font-size: 4vw;
+  color: #998609;
+}
+
+#login_form {
+  align: center;
+}
+
+#login_form * {
+  text-align: left;
+  margin-left: 3vw;
+}
+
+#login_form .login-button {
+  margin-top: 1.5vw;
+  font-family: 'league';
+  font-size: 1.2vw;
+  text-align: center;
+  width: 8vw;
+  height: 2.5vw;
+  color: #706206;
+  margin-left: 12vw;
+}
+
+
+#login_form input {
+  padding-left: .5vw;
+  margin-top: 1vw;
+  font-size: 1.5vw;
+  font-family: 'league';
+  width: 28vw;
+  height: 3vw;
+  border: solid 1px #998609;
+  color: #998609;
+  background-color: #292929;
+}
