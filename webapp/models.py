@@ -15,12 +15,12 @@ class UserProfile(models.Model):
     lol_mmr = models.IntegerField(null=True, blank=True)
     
     def __str__(self):
-      return self.user
+        return self.user.username
     
     def __unicode__(self):
-      return self.user
+        return self.user.username
 
-    
+
 class Team(models.Model):
     team_id = models.CharField(max_length=128, blank=True, null=True)
     name = models.CharField(max_length=128, null=True, blank=True)
@@ -29,19 +29,19 @@ class Team(models.Model):
     team_losses = models.IntegerField(null=True, blank=True)
     
     def __str__(self):
-      return self.name
+        return self.name
     
     def __unicode__(self):
-      return self.name
+        return self.name
 
 
 class Tournament(models.Model):
     tournament_id = models.CharField(max_length=128, blank=True, null=True)
     title = models.CharField(max_length=128)
-    teams = models.ForeignKey(Team, verbose_name='Teams',null=True)
+    teams = models.ForeignKey(Team, verbose_name='Teams', null=True)
     
     def __str__(self):
-      return self.title
+        return self.title
     
     def __unicode__(self):
-      return self.title
+        return self.title

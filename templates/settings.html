@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Team Maker</title>
+</head>
+<body>
+    <h1>User Settings</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {% if summoner_not_found %}
+            <h2>Summoner not found. Please retry</h2>
+        {% endif %}
+        {{ form.as_p }}
+        <button type="submit" value="submit">SUBMIT</button>
+    </form>
+</body>
+</html>
