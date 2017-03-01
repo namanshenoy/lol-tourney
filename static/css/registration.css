@@ -26,11 +26,11 @@ body {
 }
 
 #login_text {
-  margin-top: 0vw;
+  margin-top: 2vw;
   text-align: center;
   font-family: 'league';
   font-size: 4vw;
-  color: #998609;
+  color: #c1aa12;
 }
 
 #login_form {
@@ -42,15 +42,36 @@ body {
   margin-left: 3vw;
 }
 
-#login_form .login-button {
+.login-button {
+  float: left;
   margin-top: 1.5vw;
+  margin-left: 7vw;
   font-family: 'league';
   font-size: 1.2vw;
   text-align: center;
   width: 8vw;
   height: 2.5vw;
   color: #706206;
-  margin-left: 12vw;
+  border-radius: 0.2vw;
+}
+
+button:hover {
+  background-color: #c1aa12;
+  border: solid 1px #706206;
+  box-shadow: 0px 0px 50px rgba(178, 158, 47, 0.8), 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.register-button {
+  float: right;
+  margin-top: 1.5vw;
+  margin-right: 5vw;
+  font-family: 'league';
+  font-size: 1.2vw;
+  text-align: center;
+  width: 8vw;
+  height: 2.5vw;
+  color: #706206;
+  border-radius: 0.2vw;
 }
 
 
@@ -64,4 +85,8 @@ body {
   border: solid 1px #998609;
   color: #998609;
   background-color: #292929;
+}
+
+.has-error {
+  border: solid 1px red !important;
 }

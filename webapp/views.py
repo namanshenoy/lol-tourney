@@ -26,7 +26,7 @@ def get_mmr(user_name):
 	else:
 		return -1
 
-
+@login_required
 def index(request):
 	context = {}
 	if request.POST:
@@ -48,6 +48,10 @@ def index(request):
 
 		form = TournamentForm()
 		return render(request, 'index.html', {'form': form, })
+
+
+def home(request):
+	return render(request, 'main/tournament_new.html', {})
 
 
 @login_required
