@@ -23,5 +23,5 @@ urlpatterns = [
 	url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^tournaments/$', views.new_tournament_view, name="new_tournament"),
     url(r'^profile/$', views.user_profile_view, name="user_profile"),
-    url(r'tournaments/([0-9]+)/', views.tournament_detail_view, name="tournament_detail"),
+    url(r'tournaments/(?P<tournament_id>[0-9]+)/', views.tournament_detail_view, name="tournament_detail"),
 ]

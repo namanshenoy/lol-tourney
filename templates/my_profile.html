@@ -3,7 +3,7 @@
   <title>LolTourney|My Profile</title>
 </head>
 <body>
-  <h1>Hi User!</h1><br />
+  <h1>Hi {{profile.user}}!</h1><br />
   <label>Your first choice:</label>
   <select>
     <option value="1">top</option>
@@ -26,8 +26,22 @@
     <p>
       <label for="id_lol_summoner_name">Lol summoner name:</label>
       <input id="id_lol_summoner_name" maxlength="255" value="{{profile.lol_summoner_name}}" name="lol_summoner_name" type="text">
-
+      <p>
+        Your current summoner name: {{profile.lol_summoner_name}}<br />
+        Your MMR: {{profile.lol_mmr}}
+      </p>
     </p>
     <input type="submit" value="submit"/>
   </form>
+
+  <p>
+    My Tournaments:
+    <ul>
+    {% for tournament in tournaments reversed %}
+      <li>
+        <a href="{% url 'tournament_detail' tournament_id=tournament.id %}">{{tournament}}</a>
+      </li>
+    {%endfor%}
+    </ul>
+  </p>
 </body>

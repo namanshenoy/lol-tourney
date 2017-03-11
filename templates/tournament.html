@@ -18,19 +18,22 @@
   <br />
   <br />
     Your current tournaments:
-  <ul>
-    {% for tournament in tournaments %}
+  <ul style="list-style:none">
+    {% for tournament in tournaments reversed %}
     <li>
       {{tournament.id}}: {{tournament.tournament_name}}
       <ul>
         <li>
           Key: {{tournament.tournament_key}}
-        </li>
-        {% for player in tournament.players.all %}
+          <br />Players:
+          <ol>
+            {% for player in tournament.players.all %}
           <li>
             {{player.lol_summoner_name}}
           </li>
         {% endfor %}
+          </ol>
+      </li>
       </ul>
     </li>
     {% endfor %}
