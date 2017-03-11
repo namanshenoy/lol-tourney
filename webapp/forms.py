@@ -5,7 +5,7 @@ import webapp.models
 class TournamentForm(ModelForm):
     class Meta:
         model = Tournament
-        fields = ['tournament_name', ]
+        fields = ['tournament_name', 'tournament_key', ]
 
 class UserProfileForm(ModelForm):
     class Meta:

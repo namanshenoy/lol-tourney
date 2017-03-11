@@ -21,4 +21,13 @@
     <option value="4">adc</option>
     <option value="5">support</option>
   </select>
+  <form method="post" action=".">
+    {% csrf_token %}
+    <p>
+      <label for="id_lol_summoner_name">Lol summoner name:</label>
+      <input id="id_lol_summoner_name" maxlength="255" value="{{profile.lol_summoner_name}}" name="lol_summoner_name" type="text">
+
+    </p>
+    <input type="submit" value="submit"/>
+  </form>
 </body>

@@ -5,22 +5,39 @@
 <body>
   <h1>Tournament Home</h1>
   <p>
-    <strong>Register for tournament here :</strong><br />
-    <input type="text" placeholder="Enter your league of legends username"/>
+    {{tournament_notification}}<br />
+    <strong>Register for tournament here :</strong>
+    <br />
+    <form method="post" action=".">
+    {% csrf_token %}
+    <input type="text" name="tournament_id" placeholder="Enter tournament ID"/>
+    <input type="password" name="tournament_key" placeholder="Enter tournament Key" />
+    <input type="submit" name="submit_key" value="submit" />
+  </form>
   </p>
   <br />
   <br />
-
     Your current tournaments:
   <ul>
     {% for tournament in tournaments %}
     <li>
-      {{tournament}}
+      {{tournament.id}}: {{tournament.tournament_name}}
+      <ul>
+        <li>
+          Key: {{tournament.tournament_key}}
+        </li>
+        {% for player in tournament.players.all %}
+          <li>
+            {{player.lol_summoner_name}}
+          </li>
+        {% endfor %}
+      </ul>
     </li>
+    {% endfor %}
   </ul>
   <form method="post" action=".">
     {% csrf_token %}
     {{form.as_p}}
-    <input type="submit" value="submit"/>
+    <input type="submit" name="submit_tournament" value="submit"/>
   </form>
 </body>
