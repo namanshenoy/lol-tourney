@@ -21,4 +21,5 @@ from webapp import views
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
 	url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^tournaments/', views.new_tournament_view, name="new_tournament")
 ]

@@ -10,15 +10,17 @@
   </p>
   <br />
   <br />
-  <p>
+
     Your current tournaments:
-  </p>
   <ul>
+    {% for tournament in tournaments %}
     <li>
-      <a href="#">Tournament 1</a>
-    </li>
-    <li>
-      <a href="#">Tournament 2</a>
+      {{tournament}}
     </li>
   </ul>
+  <form method="post" action=".">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="submit"/>
+  </form>
 </body>

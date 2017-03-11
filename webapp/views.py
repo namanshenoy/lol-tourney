@@ -2,7 +2,9 @@ from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from lxml import html
+from forms import TournamentForm
 import requests
+import webapp.models
 import pytz
 
 # Create your views here.
@@ -24,3 +26,17 @@ def get_mmr(user_name):
 			return -2
 	else:
 		return -1
+
+def new_tournament_view(request):
+	print('New Tournament View\n')
+
+	if request.POST:
+		form = TournamentForm(request.POST)
+		if form.is_valid():
+			form.save()
+	else:
+		form = TournamentForm()
+
+	tournaments = Tournament.objects.all()
+
+	return render(request, 'tournament.html', {'form': form, 'tournaments': tournaments})
