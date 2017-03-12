@@ -3,29 +3,41 @@
   <title>LolTourney|My Profile</title>
 </head>
 <body>
-  <h1>Hi {{profile.user}}!</h1><br />
-  <label>Your first choice:</label>
-  <select>
-    <option value="1">top</option>
-    <option value="2">jungle</option>
-    <option value="3">mid</option>
-    <option value="4">adc</option>
-    <option value="5">support</option>
-  </select>
-  <br />
-  <label>Your second choice:</label>
-  <select>
-    <option value="1">top</option>
-    <option value="2">jungle</option>
-    <option value="3">mid</option>
-    <option value="4">adc</option>
-    <option value="5">support</option>
-  </select>
+  <a href="{% url 'index' %}">Home</a>
+
+  <h1>Hi {{profile.user.first_name}}!</h1><br />
+
+  <hr />
+  {{ user_profile_notification }}
   <form method="post" action=".">
     {% csrf_token %}
     <p>
+      <strong>Notes:</strong><br />
+      If you choose the same option twice, your probability of being filled increases
+      <br />You have a higher chance of getting your primary role if you join the tournaments earlier
+      <br /><br />
       <label for="id_lol_summoner_name">Lol summoner name:</label>
       <input id="id_lol_summoner_name" maxlength="255" value="{{profile.lol_summoner_name}}" name="lol_summoner_name" type="text">
+      <br />
+      <label for="id_primary_role">Your first choice:</label>
+      <select id="id_primary_role" name="primary_role">
+        <option {% if profile.primary_role == 0 %}selected="selected"{% endif %} value="0">Fill</option>
+        <option {% if profile.primary_role == 1 %}selected="selected"{% endif %} value="1">Top</option>
+        <option {% if profile.primary_role == 2 %}selected="selected"{% endif %} value="2">Jungle</option>
+        <option {% if profile.primary_role == 3 %}selected="selected"{% endif %} value="3">Mid</option>
+        <option {% if profile.primary_role == 4 %}selected="selected"{% endif %} value="4">Bottom</option>
+        <option {% if profile.primary_role == 5 %}selected="selected"{% endif %} value="5">Support</option>
+      </select>
+      <br />
+      <label for="id_secondary_role">Your second choice:</label>
+      <select id="id_secondary_role" name="secondary_role">
+        <option {% if profile.secondary_role == 0 %}selected="selected"{% endif %} value="0">Fill</option>
+        <option {% if profile.secondary_role == 1 %}selected="selected"{% endif %} value="1">Top</option>
+        <option {% if profile.secondary_role == 2 %}selected="selected"{% endif %} value="2">Jungle</option>
+        <option {% if profile.secondary_role == 3 %}selected="selected"{% endif %} value="3">Mid</option>
+        <option {% if profile.secondary_role == 4 %}selected="selected"{% endif %} value="4">Bottom</option>
+        <option {% if profile.secondary_role == 5 %}selected="selected"{% endif %} value="5">Support</option>
+      </select>
       <p>
         Your current summoner name: {{profile.lol_summoner_name}}<br />
         Your MMR: {{profile.lol_mmr}}
@@ -33,7 +45,7 @@
     </p>
     <input type="submit" value="submit"/>
   </form>
-
+<hr />
   <p>
     My Tournaments:
     <ul>

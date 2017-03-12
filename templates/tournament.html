@@ -3,6 +3,7 @@
   <title>LolTourney | Tournaments</title>
 </head>
 <body>
+  <a href="{% url 'index' %}">Home</a>
   <h1>Tournament Home</h1>
   <p>
     {{tournament_notification}}<br />
@@ -23,13 +24,13 @@
     <li>
       {{tournament.id}}: {{tournament.tournament_name}}
       <ul>
-        <li>
-          Key: {{tournament.tournament_key}}
-          <br />Players:
+        <li>Key: {{tournament.tournament_key}}</li>
+        <li>Players:
           <ol>
             {% for player in tournament.players.all %}
           <li>
-            {{player.lol_summoner_name}}
+            <strong>{{player.user.first_name}} {{player.user.last_name}}</strong><br />
+            {{player.lol_summoner_name}}&nbsp;<br />{{player.primary_role_name}}/{{player.secondary_role_name}}
           </li>
         {% endfor %}
           </ol>

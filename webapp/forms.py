@@ -10,4 +10,4 @@ class TournamentForm(ModelForm):
 class UserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['lol_summoner_name', ]
+        fields = ['lol_summoner_name', 'primary_role', 'secondary_role']

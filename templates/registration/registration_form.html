@@ -17,18 +17,26 @@
     <form method="post" id="login_form" action=".">
       <label id="login_text"style="padding-left:4.5vw;">Register Here</label>
        {%csrf_token%}
+       {{form.errors}}
+
       <table>
-        <tr>
-          <td> <input type= "text" id="id_username" name="username" placeholder="username" required autofocus/></td>
+      <tr>
+          <td> <input required="required" type= "text" id="id_username" name="username" placeholder="Username" required autofocus/></td>
         </tr>
         <tr>
-          <td><input type="text" id="id_email" name="email" placeholder="email" required/></td>
+          <td> <input required="required" type= "text" id="id_username" name="first_name" placeholder="First Name" required autofocus/></td>
         </tr>
         <tr>
-          <td><input type="text" id="id_password" name="password" placeholder="password" required /></td>
+          <td> <input required="required" type= "text" id="id_username" name="last_name" placeholder="Last Name" required autofocus/></td>
         </tr>
-        <tr>  
-          <td><input type="text" id="id_password2" name="password2" placeholder="confirm password" required /></td>
+        <tr>
+          <td><input required="required" type="text" id="id_email" name="email" placeholder="email" required/></td>
+        </tr>
+        <tr>
+          <td><input required="required" type="password" id="id_password" name="password1" placeholder="Password" required /></td>
+        </tr>
+        <tr>
+          <td><input required="required" type="password" id="id_password2" name="password2" placeholder="Confirm password" required /></td>
         </tr>
         <tr>
           <td ><button class="login-button" type="submit" value="submit">SUBMIT</button></td>
