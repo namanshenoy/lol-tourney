@@ -21,7 +21,9 @@ def text_to_mmr(text):
 		'Challenger': 2900
     }[text]
 
+
 def get_mmr(user_name):
+	username=username.replace(' ','')
 	print "Getting MMR for: "+user_name
 	page = requests.get('https://na.op.gg/summoner/ajax/mmr/summonerName=' + user_name)
 	tree = html.fromstring(page.content)
@@ -83,6 +85,10 @@ def get_mmr(user_name):
 		print("MMR is "+str(final_mmr)+" for summoner "+user_name)
 		return final_mmr
 
+
+def bootstrap_index(request):
+	return render(request, 'bootstrap_test/index.html',{})
+
 def home(request):
 	return render(request, 'home.html', {})
 
@@ -143,6 +149,7 @@ def tournament_detail_view(request, tournament_id):
 	print 'Tournament Detail View\nTournament id: ' + tournament_id
 	tournament = get_object_or_404(Tournament, id=int(tournament_id))
 	return render(request, 'tournament_detail.html', {'tournament':tournament})
+
 
 def remove_from_tournament(request, tournament_id):
 	print "Removing "+ str(request.user) + " from tournament "+  str(tournament_id)
