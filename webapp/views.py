@@ -85,6 +85,17 @@ def get_mmr(user_name):
 		print("MMR is "+str(final_mmr)+" for summoner "+user_name)
 		return final_mmr
 
+def create_teams(request, tournament_id):
+	try:
+		tournament = Tournament.objects.get(id=tournament_id)
+		
+		return True
+	except Exception, e:
+		print e
+		pass
+
+
+	return False
 
 def bootstrap_index(request):
 	return render(request, 'bootstrap_test/index.html',)

@@ -17,7 +17,7 @@ user_registered.connect(user_created)
 
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     lol_mmr = models.IntegerField(default=0)
     lol_mmr_last_updated = models.BigIntegerField(default=time.time())
     lol_summoner_name = models.CharField(max_length=255, blank=True, null=True)
@@ -49,7 +49,6 @@ class UserProfile(models.Model):
 
     primary_role_name = property(_get_primary_role)
     secondary_role_name = property(_get_secondary_role)
-
 
 
 class Tournament(models.Model):

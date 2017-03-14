@@ -7,258 +7,265 @@ import random
 def randomword(length):
    return ''.join(random.choice(string.lowercase) for i in range(length))
 
- 
+
 class Player:
     MMR = 0
-    Preference = 0
-    Preference2 = 0
-    name = randomword(5)
- 
-    def __init__(self):
-        self.Preference = randint(1, 5)
- 
-        self.Preference2 = randint(1, 5)
+    primary_role = 0
+    secondary_role = 0
+    lol_summoner_name = randomword(5)
 
-	self.name = randomword(5)
+    def __init__(self):
+        self.primary_role = randint(1, 5)
+
+        self.secondary_role = randint(1, 5)
+
+	self.lol_summoner_name = randomword(5)
 
         rank = randint(0, 10000)
         if(rank <= 3):
-            self.MMR = randint(2900, 3200)
+            self.lol_mmr = randint(2900, 3200)
         elif(rank <= 8):
-            self.MMR = randint(2550, 2899)
+            self.lol_mmr = randint(2550, 2899)
         elif(rank <= 168):
-            self.MMR = randint(2200, 2549)
+            self.lol_mmr = randint(2200, 2549)
         elif(rank <= 803):
-            self.MMR = randint(1850, 2199)
+            self.lol_mmr = randint(1850, 2199)
         elif(rank <= 2403):
-            self.MMR = randint(1500, 1849)
+            self.lol_mmr = randint(1500, 1849)
         elif(rank <= 6144):
-            self.MMR = randint(1150, 1499)
+            self.lol_mmr = randint(1150, 1499)
         elif(rank <= 10000):
-            self.MMR = randint(900, 1145)
+            self.lol_mmr = randint(900, 1145)
 
 
-        while (self.Preference2 == self.Preference):
-            self.Preference2 = randint(1, 5)
- 
- 
-List = []
-totalMMR = 0
-totalPlayers = 0
-rand = randint(50,150)
-print("Random number = " + str(rand))
-for x in range(1, rand+1):
-    List.append(Player())
-    totalMMR += List[x - 1].MMR
-    totalPlayers += 1
-'''subsList = []
-if totalPlayers % 5 != 0:
-    while totalPlayers %5 != 0:
-        subsList.append(List[-1])
-	del List[-1]
-	totalPlayers -=1
+        while (self.secondary_role == self.primary_role):
+            self.secondary_role = randint(1, 5)
 
-for player in subsList:
-    print(player.MMR)	
-'''
-avgMMR = totalMMR / (rand-1)
-maxPlayersPerPref = int(len(List) / 5)
-print('max playersperpref = ' + str(maxPlayersPerPref))
-# list is indexed 0-99
- 
-p1 = []
-p2 = []
-p3 = []
-p4 = []
-p5 = []
-subs = []
-for x in range(0, rand):
-    if List[x].Preference == 1 and len(p1) < maxPlayersPerPref:
-        p1.append(List[x])
-    elif List[x].Preference == 2 and len(p2) < maxPlayersPerPref:
-        p2.append(List[x])
-    elif List[x].Preference == 3 and len(p3) < maxPlayersPerPref:
-        p3.append(List[x])
-    elif List[x].Preference == 4 and len(p4) < maxPlayersPerPref:
-        p4.append(List[x])
-    elif List[x].Preference == 5 and len(p5) < maxPlayersPerPref:
-        p5.append(List[x])
- 
-    elif List[x].Preference2 == 1 and len(p1) < maxPlayersPerPref:
-        p1.append(List[x])
-    elif List[x].Preference2 == 2 and len(p2) < maxPlayersPerPref:
-        p2.append(List[x])
-    elif List[x].Preference2 == 3 and len(p3) < maxPlayersPerPref:
-        p3.append(List[x])
-    elif List[x].Preference2 == 4 and len(p4) < maxPlayersPerPref:
-        p4.append(List[x])
-    elif List[x].Preference2 == 5 and len(p5) < maxPlayersPerPref:
-        p5.append(List[x])
- 
-    elif len(p1) < maxPlayersPerPref:
-        p1.append(List[x])
-    elif len(p2) < maxPlayersPerPref:
-        p2.append(List[x])
-    elif len(p3) < maxPlayersPerPref:
-        p3.append(List[x])
-    elif len(p4) < maxPlayersPerPref:
-        p4.append(List[x])
-    elif len(p5) < maxPlayersPerPref:
-        p5.append(List[x])
- 
-    else:
-        subs.append(List[x])
- 
-print('\nSubs')
-for sub in subs:
-	print (sub.name + " " +str(sub.MMR))
+def make_teams(List):
+    # List = []
+    totalMMR = 0
+    totalPlayers = len(List)
+    #rand = randint(50,150)
+    #print("Random number = " + str(rand))
+    for player in List:
+        totalMMR += player.lol_mmr
+    '''
+    for x in range(1, rand+1):
+        List.append(Player())
+        totalMMR += List[x - 1].lol_mmr
+        totalPlayers += 1
+        '''
+    '''subsList = []
+    if totalPlayers % 5 != 0:
+        while totalPlayers %5 != 0:
+            subsList.append(List[-1])
+    	del List[-1]
+    	totalPlayers -=1
 
-print('\nPref 1 = ' + str(len(p1)))
-counter = 1
-for i in p1:
-    print(str(counter) + ' ' + i.name+' ' + str(i.MMR))
-    counter += 1
-print('\nPref 2 = ' + str(len(p2)))
-counter = 1
-for i in p2:
-    print(str(counter) + ' ' +i.name+' '+ str(i.MMR))
-    counter += 1
-print('\nPref 3 = ' + str(len(p3)))
-counter = 1
-for i in p3:
-    print(str(counter) + ' ' + i.name + ' '+ str(i.MMR))
-    counter += 1
-print('\nPref 4 = ' + str(len(p4)))
-counter = 1
-for i in p4:
-    print(str(counter) + ' ' + i.name+ ' ' + str(i.MMR))
-    counter += 1
-print('\nPref 5 = ' + str(len(p5)))
-counter = 1
-for i in p5:
-    print(str(counter) + ' ' + i.name+' '+str(i.MMR))
-    counter += 1
- 
-team = []
- 
-# balance preferences
- 
-print('Teams:\n')
- 
-for x in range(0, rand/5):
-    team.append([])
-    team[x].append(p1.pop(0))
-    team[x].append(p2.pop(0))
-    team[x].append(p3.pop(0))
-    team[x].append(p4.pop(0))
-    team[x].append(p5.pop(0))
-    team[x].append((team[x][0].MMR + team[x][1].MMR + team[x][2].MMR + team[x][3].MMR + team[x][4].MMR) / 5)
- 
-print('\n')
+    for player in subsList:
+        print(player.lol_mmr)
+    '''
+    avgMMR = totalMMR / totalPlayers
+    maxPlayersPerPref = int(len(List) / 5)
+    print('max playersperpref = ' + str(maxPlayersPerPref))
+    # list is indexed 0-99
 
+    p1 = []
+    p2 = []
+    p3 = []
+    p4 = []
+    p5 = []
+    subs = []
+    for item in List:
+        if item.primary_role == 1 and len(p1) < maxPlayersPerPref:
+            p1.append(item)
+        elif item.primary_role == 2 and len(p2) < maxPlayersPerPref:
+            p2.append(item)
+        elif item.primary_role == 3 and len(p3) < maxPlayersPerPref:
+            p3.append(item)
+        elif item.primary_role == 4 and len(p4) < maxPlayersPerPref:
+            p4.append(item)
+        elif item.primary_role == 5 and len(p5) < maxPlayersPerPref:
+            p5.append(item)
 
- 
-for x in range(0, rand/5):
-    print("\nTeam " + str(x) + ":")
-    print('info: ' + team[x][0].name + ' ' + str(team[x][0].MMR))
-    print('info: ' + team[x][1].name + ' ' + str(team[x][1].MMR))
-    print('info: ' + team[x][2].name + ' ' + str(team[x][2].MMR))
-    print('info: ' + team[x][3].name + ' ' + str(team[x][3].MMR))
-    print('info: ' + team[x][4].name + ' ' + str(team[x][4].MMR))
-    print("Avg MMR: " + str(team[x][5]) + "\n")
- 
-print('Avg MMR: ' + str(avgMMR))
+        elif item.secondary_role == 1 and len(p1) < maxPlayersPerPref:
+            p1.append(item)
+        elif item.secondary_role == 2 and len(p2) < maxPlayersPerPref:
+            p2.append(item)
+        elif item.secondary_role == 3 and len(p3) < maxPlayersPerPref:
+            p3.append(item)
+        elif item.secondary_role == 4 and len(p4) < maxPlayersPerPref:
+            p4.append(item)
+        elif item.secondary_role == 5 and len(p5) < maxPlayersPerPref:
+            p5.append(item)
 
-millis = int(round(time.time() * 1000))
-print('Time Start: ', millis)
+        elif len(p1) < maxPlayersPerPref:
+            p1.append(item)
+        elif len(p2) < maxPlayersPerPref:
+            p2.append(item)
+        elif len(p3) < maxPlayersPerPref:
+            p3.append(item)
+        elif len(p4) < maxPlayersPerPref:
+            p4.append(item)
+        elif len(p5) < maxPlayersPerPref:
+            p5.append(item)
 
-for player in range(0, 5):
-    for i in team:
-        for x in team:
-            if (i == x):
-                break
-            team1swapavg = ((i[5]*5)-i[player].MMR+x[player].MMR)/5
-            team2swapavg = ((x[5]*5)-x[player].MMR+i[player].MMR)/5
-            if(abs(team1swapavg - avgMMR) < abs(i[5] - avgMMR) and abs(team2swapavg - avgMMR) < abs(x[5] - avgMMR)):
-                temp = i[player]
-                i[player] = x[player]
-                x[player] = i[player]
-                i[5] = team1swapavg
-                x[5] = team2swapavg
+        else:
+            subs.append(item)
 
-millis2 = int(round(time.time() * 1000))
-print('End Time: ', millis2)
-print('Total Time: ', millis2-millis)
+    print('\nSubs')
+    for sub in subs:
+    	print (sub.lol_summoner_name + " " +str(sub.lol_mmr))
 
-for x in range(0, rand/5):
-    print("\nTeam " + str(x) + ":")
-    print('info: ' + str(team[x][0].MMR))
-    print('info: ' + str(team[x][1].MMR))
-    print('info: ' + str(team[x][2].MMR))
-    print('info: ' + str(team[x][3].MMR))
-    print('info: ' + str(team[x][4].MMR))
-    print("Avg MMR: " + str(team[x][5]) + "\n")
- 
-print('22Avg MMR: ' + str(avgMMR))
+    print('\nPref 1 = ' + str(len(p1)))
+    counter = 1
+    for i in p1:
+        print(str(counter) + ' ' + i.lol_summoner_name+' ' + str(i.lol_mmr))
+        counter += 1
+    print('\nPref 2 = ' + str(len(p2)))
+    counter = 1
+    for i in p2:
+        print(str(counter) + ' ' +i.lol_summoner_name+' '+ str(i.lol_mmr))
+        counter += 1
+    print('\nPref 3 = ' + str(len(p3)))
+    counter = 1
+    for i in p3:
+        print(str(counter) + ' ' + i.lol_summoner_name + ' '+ str(i.lol_mmr))
+        counter += 1
+    print('\nPref 4 = ' + str(len(p4)))
+    counter = 1
+    for i in p4:
+        print(str(counter) + ' ' + i.lol_summoner_name+ ' ' + str(i.lol_mmr))
+        counter += 1
+    print('\nPref 5 = ' + str(len(p5)))
+    counter = 1
+    for i in p5:
+        print(str(counter) + ' ' + i.lol_summoner_name+' '+str(i.lol_mmr))
+        counter += 1
+
+    team = []
+
+    # balance preferences
+
+    print('Teams:\n')
+
+    for x in range(0, totalPlayers/5):
+        team.append([])
+        team[x].append(p1.pop(0))
+        team[x].append(p2.pop(0))
+        team[x].append(p3.pop(0))
+        team[x].append(p4.pop(0))
+        team[x].append(p5.pop(0))
+        team[x].append((team[x][0].lol_mmr + team[x][1].lol_mmr + team[x][2].lol_mmr + team[x][3].lol_mmr + team[x][4].lol_mmr) / 5)
+
+    print('\n')
 
 
-maxTeam = 1
-minTeam = 2
-counter = 0
-for t in team:
-    if t[5] > team[maxTeam][5]:
-        maxTeam = counter
- 
-    if t[5] < team[minTeam][5]:
-        minTeam = counter
-    counter += 1
- 
 
- 
- 
-"""while (team[maxTeam][5]) > avgMMR:
-    if (team[maxTeam][2].MMR - team[minTeam][2].MMR) > 100:
-            maxMid = team[maxTeam][2]
-            minMid = team[minTeam][2]
-            team[maxTeam][2].replace( minMid)
-            team[minTeam][2].replace( maxMid)
-    elif (team[maxTeam][1].MMR - team[minTeam][1].MMR) > 100:
-            maxJun = team[maxTeam][1]
-            minJun = team[minTeam][1]
-            team[maxTeam][1] .replace(minJun)
-            team[minTeam][1].replace( maxJun)
-    elif (team[maxTeam][0].MMR - team[minTeam][0].MMR) > 100:
-            maxTop = team[maxTeam][0]
-            minTop = team[minTeam][0]
-            team[maxTeam][0].replace( minTop)
-            team[minTeam][0].replace(maxTop)
-    elif (team[maxTeam][3].MMR - team[minTeam][3].MMR) > 100:
-            maxADC = team[maxTeam][3]
-            minADC = team[minTeam][3]
-            team[maxTeam][3].replace( minADC)
-            team[minTeam][3].replace(maxADC)
-    elif (team[maxTeam][4].MMR - team[minTeam][4].MMR) > 100:
-            maxSup = team[maxTeam][4]
-            minSup = team[minTeam][4]
-            team[maxTeam][4].replace( minSup)
-            team[minTeam][4].replace(maxSup)"""
- 
-print("\nTeam MAX " + str(maxTeam) + ":")
-print('info: ' + str(team[maxTeam][0].MMR))
-print('info: ' + str(team[maxTeam][1].MMR))
-print('info: ' + str(team[maxTeam][2].MMR))
-print('info: ' + str(team[maxTeam][3].MMR))
-print('info: ' + str(team[maxTeam][4].MMR))
-print('Max = team ' + str(maxTeam) + ' MMR: ' + str((
-                                                    team[maxTeam][0].MMR + team[maxTeam][1].MMR + team[maxTeam][2].MMR +
-                                                    team[maxTeam][3].MMR + team[maxTeam][4].MMR) / 5))
- 
-print("\nTeam MIN " + str(minTeam) + ":")
-print('info: ' + str(team[minTeam][0].MMR))
-print('info: ' + str(team[minTeam][1].MMR))
-print('info: ' + str(team[minTeam][2].MMR))
-print('info: ' + str(team[minTeam][3].MMR))
-print('info: ' + str(team[minTeam][4].MMR))
-print('Min = team ' + str(minTeam) + ' MMR: ' + str((
-                                                    team[minTeam][0].MMR + team[minTeam][1].MMR + team[minTeam][2].MMR +
-                                                    team[minTeam][3].MMR + team[minTeam][4].MMR) / 5))
+    for x in range(0, totalPlayers/5):
+        print("\nTeam " + str(x) + ":")
+        print('info: ' + team[x][0].lol_summoner_name + ' ' + str(team[x][0].lol_mmr))
+        print('info: ' + team[x][1].lol_summoner_name + ' ' + str(team[x][1].lol_mmr))
+        print('info: ' + team[x][2].lol_summoner_name + ' ' + str(team[x][2].lol_mmr))
+        print('info: ' + team[x][3].lol_summoner_name + ' ' + str(team[x][3].lol_mmr))
+        print('info: ' + team[x][4].lol_summoner_name + ' ' + str(team[x][4].lol_mmr))
+        print("Avg MMR: " + str(team[x][5]) + "\n")
+
+    print('Avg MMR: ' + str(avgMMR))
+
+    millis = int(round(time.time() * 1000))
+    print('Time Start: ', millis)
+
+    for player in range(0, 5):
+        for i in team:
+            for x in team:
+                if (i == x):
+                    break
+                team1swapavg = ((i[5]*5)-i[player].lol_mmr+x[player].lol_mmr)/5
+                team2swapavg = ((x[5]*5)-x[player].lol_mmr+i[player].lol_mmr)/5
+                if(abs(team1swapavg - avgMMR) < abs(i[5] - avgMMR) and abs(team2swapavg - avgMMR) < abs(x[5] - avgMMR)):
+                    temp = i[player]
+                    i[player] = x[player]
+                    x[player] = i[player]
+                    i[5] = team1swapavg
+                    x[5] = team2swapavg
+
+    millis2 = int(round(time.time() * 1000))
+    print('End Time: ', millis2)
+    print('Total Time: ', millis2-millis)
+
+    for x in range(0, totalPlayers/5):
+        print("\nTeam " + str(x) + ":")
+        print('info: ' + str(team[x][0].lol_mmr))
+        print('info: ' + str(team[x][1].lol_mmr))
+        print('info: ' + str(team[x][2].lol_mmr))
+        print('info: ' + str(team[x][3].lol_mmr))
+        print('info: ' + str(team[x][4].lol_mmr))
+        print("Team Avg MMR: " + str(team[x][5]) + "\n")
+
+    print('Total Avg MMR: ' + str(avgMMR))
+
+
+    maxTeam = 1
+    minTeam = 2
+    counter = 0
+    for t in team:
+        if t[5] > team[maxTeam][5]:
+            maxTeam = counter
+
+        if t[5] < team[minTeam][5]:
+            minTeam = counter
+        counter += 1
+
+
+
+
+    """while (team[maxTeam][5]) > avgMMR:
+        if (team[maxTeam][2].lol_mmr - team[minTeam][2].lol_mmr) > 100:
+                maxMid = team[maxTeam][2]
+                minMid = team[minTeam][2]
+                team[maxTeam][2].replace( minMid)
+                team[minTeam][2].replace( maxMid)
+        elif (team[maxTeam][1].lol_mmr - team[minTeam][1].lol_mmr) > 100:
+                maxJun = team[maxTeam][1]
+                minJun = team[minTeam][1]
+                team[maxTeam][1] .replace(minJun)
+                team[minTeam][1].replace( maxJun)
+        elif (team[maxTeam][0].lol_mmr - team[minTeam][0].lol_mmr) > 100:
+                maxTop = team[maxTeam][0]
+                minTop = team[minTeam][0]
+                team[maxTeam][0].replace( minTop)
+                team[minTeam][0].replace(maxTop)
+        elif (team[maxTeam][3].lol_mmr - team[minTeam][3].lol_mmr) > 100:
+                maxADC = team[maxTeam][3]
+                minADC = team[minTeam][3]
+                team[maxTeam][3].replace( minADC)
+                team[minTeam][3].replace(maxADC)
+        elif (team[maxTeam][4].lol_mmr - team[minTeam][4].lol_mmr) > 100:
+                maxSup = team[maxTeam][4]
+                minSup = team[minTeam][4]
+                team[maxTeam][4].replace( minSup)
+                team[minTeam][4].replace(maxSup)"""
+
+    print("\nTeam MAX " + str(maxTeam) + ":")
+    print('info: ' + str(team[maxTeam][0].lol_mmr))
+    print('info: ' + str(team[maxTeam][1].lol_mmr))
+    print('info: ' + str(team[maxTeam][2].lol_mmr))
+    print('info: ' + str(team[maxTeam][3].lol_mmr))
+    print('info: ' + str(team[maxTeam][4].lol_mmr))
+    print('Max = team ' + str(maxTeam) + ' MMR: ' + str((
+                                                        team[maxTeam][0].lol_mmr + team[maxTeam][1].lol_mmr + team[maxTeam][2].lol_mmr +
+                                                        team[maxTeam][3].lol_mmr + team[maxTeam][4].lol_mmr) / 5))
+
+    print("\nTeam MIN " + str(minTeam) + ":")
+    print('info: ' + str(team[minTeam][0].lol_mmr))
+    print('info: ' + str(team[minTeam][1].lol_mmr))
+    print('info: ' + str(team[minTeam][2].lol_mmr))
+    print('info: ' + str(team[minTeam][3].lol_mmr))
+    print('info: ' + str(team[minTeam][4].lol_mmr))
+    print('Min = team ' + str(minTeam) + ' MMR: ' + str((
+                                                        team[minTeam][0].lol_mmr + team[minTeam][1].lol_mmr + team[minTeam][2].lol_mmr +
+                                                        team[minTeam][3].lol_mmr + team[minTeam][4].lol_mmr) / 5))
+
+    for sub in subs:
+        print(str(sub.lol_mmr))
