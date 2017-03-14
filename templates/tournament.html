@@ -1,47 +1,72 @@
 <!DOCTYPE html>
+{%load static %}
 <head>
   <title>LolTourney | Tournaments</title>
+  {%include 'head.html'%}
 </head>
 <body>
-  <a href="{% url 'index' %}">Home</a>
-  <h1>Tournament Home</h1>
-  <p>
-    {{tournament_notification}}<br />
-    <strong>Register for tournament here :</strong>
-    <br />
-    <form method="post" action=".">
-    {% csrf_token %}
-    <input type="text" name="tournament_id" placeholder="Enter tournament ID"/>
-    <input type="password" name="tournament_key" placeholder="Enter tournament Key" />
-    <input type="submit" name="submit_key" value="submit" />
-  </form>
-  </p>
-  <br />
-  <br />
-    Your current tournaments:
-  <ul style="list-style:none">
-    {% for tournament in tournaments reversed %}
-    <li>
-      {{tournament.id}}: {{tournament.tournament_name}}
-      <ul>
-        <li>Key: {{tournament.tournament_key}}</li>
-        <li>Players:
-          <ol>
-            {% for player in tournament.players.all %}
-          <li>
-            <strong>{{player.user.first_name}} {{player.user.last_name}}</strong><br />
-            {{player.lol_summoner_name}}&nbsp;<br />{{player.primary_role_name}}/{{player.secondary_role_name}}
-          </li>
-        {% endfor %}
-          </ol>
-      </li>
-      </ul>
-    </li>
-    {% endfor %}
-  </ul>
-  <form method="post" action=".">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" name="submit_tournament" value="submit"/>
-  </form>
-</body>
+  <div class="container-fluid">
+    {% include 'navbar.html'%}
+    <div class="col-md-12">
+      <h1>Tournament Home</h1>
+      <hr />
+      <p>
+        {{tournament_notification}}<br />
+        <strong>Register for tournament here :</strong>
+        <br />
+        <form method="post" action=".">
+          {% csrf_token %}
+          <h4>Join Tournament</h4>
+          <input type="text" name="tournament_id" placeholder="Enter Tournament ID"/>
+          <input type="password" name="tournament_key" placeholder="Enter Tournament Key" />
+          <input type="submit" name="submit_key" value="submit" />
+        </form>
+        <form method="post" action=".">
+          {% csrf_token %}
+          <h4>New Tournament</h4>
+          <input id="id_tournament_name" maxlength="255" placeholder="Tournament Name" name="tournament_name" type="text">
+          <input id="id_tournament_key" maxlength="255" name="tournament_key" placeholder="Enter Key" type="text">
+          <input type="submit" name="submit_tournament" value="submit"/>
+        </form>
+      </p>
+      <hr />
+      <h3>Available tournaments:</h3>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <td>
+              Tournament ID
+            </td>
+            <td>
+              Tournament Name
+            </td>
+            <td>
+              Tournament Key
+            </td>
+            <td>
+              Game
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tournament in tournaments reversed %}
+          <tr>
+            <td>
+              <a href={%url 'tournament_detail' tournament_id=tournament.id %}>{{tournament.id}}</a>
+            </td>
+            <td>
+              <a href={%url 'tournament_detail' tournament_id=tournament.id %}>{{tournament.tournament_name}}</a>
+            </td>
+            <td>
+              {{tournament.tournament_key}}
+            </td>
+            <td>
+              League of Legends
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+  </html>

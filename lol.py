@@ -1,16 +1,25 @@
 from random import randint
 import time
+import string
+
+import random
+
+def randomword(length):
+   return ''.join(random.choice(string.lowercase) for i in range(length))
+
  
 class Player:
     MMR = 0
     Preference = 0
     Preference2 = 0
+    name = randomword(5)
  
     def __init__(self):
         self.Preference = randint(1, 5)
  
         self.Preference2 = randint(1, 5)
 
+	self.name = randomword(5)
 
         rank = randint(0, 10000)
         if(rank <= 3):
@@ -26,7 +35,7 @@ class Player:
         elif(rank <= 6144):
             self.MMR = randint(1150, 1499)
         elif(rank <= 10000):
-            self.MMR = randint(0, 1145)
+            self.MMR = randint(900, 1145)
 
 
         while (self.Preference2 == self.Preference):
@@ -36,11 +45,23 @@ class Player:
 List = []
 totalMMR = 0
 totalPlayers = 0
-for x in range(1, 101):
+rand = randint(50,150)
+print("Random number = " + str(rand))
+for x in range(1, rand+1):
     List.append(Player())
     totalMMR += List[x - 1].MMR
     totalPlayers += 1
-avgMMR = totalMMR / 100
+'''subsList = []
+if totalPlayers % 5 != 0:
+    while totalPlayers %5 != 0:
+        subsList.append(List[-1])
+	del List[-1]
+	totalPlayers -=1
+
+for player in subsList:
+    print(player.MMR)	
+'''
+avgMMR = totalMMR / (rand-1)
 maxPlayersPerPref = int(len(List) / 5)
 print('max playersperpref = ' + str(maxPlayersPerPref))
 # list is indexed 0-99
@@ -51,7 +72,7 @@ p3 = []
 p4 = []
 p5 = []
 subs = []
-for x in range(0, 100):
+for x in range(0, rand):
     if List[x].Preference == 1 and len(p1) < maxPlayersPerPref:
         p1.append(List[x])
     elif List[x].Preference == 2 and len(p2) < maxPlayersPerPref:
@@ -88,30 +109,34 @@ for x in range(0, 100):
     else:
         subs.append(List[x])
  
+print('\nSubs')
+for sub in subs:
+	print (sub.name + " " +str(sub.MMR))
+
 print('\nPref 1 = ' + str(len(p1)))
 counter = 1
 for i in p1:
-    print(str(counter) + ' ' + str(i.MMR))
+    print(str(counter) + ' ' + i.name+' ' + str(i.MMR))
     counter += 1
 print('\nPref 2 = ' + str(len(p2)))
 counter = 1
 for i in p2:
-    print(str(counter) + ' ' + str(i.MMR))
+    print(str(counter) + ' ' +i.name+' '+ str(i.MMR))
     counter += 1
 print('\nPref 3 = ' + str(len(p3)))
 counter = 1
 for i in p3:
-    print(str(counter) + ' ' + str(i.MMR))
+    print(str(counter) + ' ' + i.name + ' '+ str(i.MMR))
     counter += 1
 print('\nPref 4 = ' + str(len(p4)))
 counter = 1
 for i in p4:
-    print(str(counter) + ' ' + str(i.MMR))
+    print(str(counter) + ' ' + i.name+ ' ' + str(i.MMR))
     counter += 1
 print('\nPref 5 = ' + str(len(p5)))
 counter = 1
 for i in p5:
-    print(str(counter) + ' ' + str(i.MMR))
+    print(str(counter) + ' ' + i.name+' '+str(i.MMR))
     counter += 1
  
 team = []
@@ -120,7 +145,7 @@ team = []
  
 print('Teams:\n')
  
-for x in range(0, 20):
+for x in range(0, rand/5):
     team.append([])
     team[x].append(p1.pop(0))
     team[x].append(p2.pop(0))
@@ -133,13 +158,13 @@ print('\n')
 
 
  
-for x in range(0, 20):
+for x in range(0, rand/5):
     print("\nTeam " + str(x) + ":")
-    print('info: ' + str(team[x][0].MMR))
-    print('info: ' + str(team[x][1].MMR))
-    print('info: ' + str(team[x][2].MMR))
-    print('info: ' + str(team[x][3].MMR))
-    print('info: ' + str(team[x][4].MMR))
+    print('info: ' + team[x][0].name + ' ' + str(team[x][0].MMR))
+    print('info: ' + team[x][1].name + ' ' + str(team[x][1].MMR))
+    print('info: ' + team[x][2].name + ' ' + str(team[x][2].MMR))
+    print('info: ' + team[x][3].name + ' ' + str(team[x][3].MMR))
+    print('info: ' + team[x][4].name + ' ' + str(team[x][4].MMR))
     print("Avg MMR: " + str(team[x][5]) + "\n")
  
 print('Avg MMR: ' + str(avgMMR))
@@ -165,7 +190,7 @@ millis2 = int(round(time.time() * 1000))
 print('End Time: ', millis2)
 print('Total Time: ', millis2-millis)
 
-for x in range(0, 20):
+for x in range(0, rand/5):
     print("\nTeam " + str(x) + ":")
     print('info: ' + str(team[x][0].MMR))
     print('info: ' + str(team[x][1].MMR))

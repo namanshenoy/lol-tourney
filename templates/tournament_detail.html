@@ -1,24 +1,37 @@
 <!DOCTYPE html>
 <head>
   <title>LolTourney | Tournament 1</title>
+  {%include 'head.html'%}
 </head>
 <body>
-  <a href="{% url 'index' %}">Home</a>
-
-  <h1>Tournament: {{ tournament.tournament_name}}</h1>
-  <h3>Key: {{tournament.tournament_key}}</h3>
-
-  <p>
-    Players:
-    <ul>
-      {% for player in tournament.players.all%}
-      <li>
-        {{player.lol_summoner_name}} {%if player.user == request.user %}<a href="{% url 'remove_user' tournament_id=tournament.id %}">remove me</a>{%endif%}
-      </li>
-      {%endfor%}
-    </ul>
-  </p>
-  <p>
-    Teams not set yet. Come back after deadline!
-  </p>
+  <div class="container-fluid">
+    {% include 'navbar.html'%}
+    <div class="col-md-12">
+      <h1>Tournament: {{ tournament.tournament_name}}</h1>
+      <h3>Key: {{tournament.tournament_key}}</h3>
+      <hr />
+      <p>
+        Players:
+        <ul>
+          {% for player in tournament.players.all%}
+          <li>
+            {{player.lol_summoner_name}} {%if player.user == request.user %}<a href="{% url 'remove_user' tournament_id=tournament.id %}">remove me</a>{%endif%}
+          </li>
+          {%endfor%}
+        </ul>
+      </p>
+      <p>
+        Teams not set yet. Come back after deadline!
+      </p>
+      <p>
+        {% if request.user == tournament.main_user%}
+        <form method="post" action=".">
+          <input type="text" placeholder="Match Number" />
+          <input type="text" placeholder="Winner" />
+          <input type="submit" name="update_bracket" />
+        </form>
+        {% endif %}
+      </p>
+    </div>
+  </div>
 </body>

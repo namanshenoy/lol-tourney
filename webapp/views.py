@@ -23,7 +23,7 @@ def text_to_mmr(text):
 
 
 def get_mmr(user_name):
-	username=username.replace(' ','')
+	user_name=user_name.replace(' ','')
 	print "Getting MMR for: "+user_name
 	page = requests.get('https://na.op.gg/summoner/ajax/mmr/summonerName=' + user_name)
 	tree = html.fromstring(page.content)
@@ -87,7 +87,7 @@ def get_mmr(user_name):
 
 
 def bootstrap_index(request):
-	return render(request, 'bootstrap_test/index.html',{})
+	return render(request, 'bootstrap_test/index.html',)
 
 def home(request):
 	return render(request, 'home.html', {})
@@ -102,7 +102,9 @@ def new_tournament_view(request):
 		form = TournamentForm(request.POST)
 
 		if form.is_valid():
-			saved = form.save()
+			saved = form.save(commit=False)
+			saved.main_user = request.user
+			saved.save()
 			print ('\nSaved: ' + str(saved.tournament_name))
 	elif 'submit_key' in request.POST:
 		form = TournamentForm()
