@@ -1,0 +1,67 @@
+@font-face {
+  font-family: 'league';
+  src: url('../fonts/league.ttf');
+}
+
+#navbar {
+	position: absolute;
+	width: 20vw;
+	height: 100vh;
+	background-color: rgba(63, 62, 80, 0.88);
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+#main-content-wrapper {
+	margin-left: 20vw;
+	width: 80vw;
+	height: 100vh;
+	background-color: rgba(52, 52, 59, 0.88);
+}
+
+#main-content-wrapper h1{
+	margin-top: 0px;
+	padding-top: 2vh;
+	text-align: center;
+	text-height: 0;
+	font-family: 'league';
+	color: white;
+}
+
+.row {
+	clear: left;
+	float: left;
+	margin-top: 3vw;
+	padding-left: 1vw;
+	text-align: left;
+	font-family: 'league';
+	font-size: 3vh;
+	color: white;
+}
+
+.row input {
+	width: 40vw;
+	margin-left: 20vw;
+	background-color: #2c2b34;
+	border: solid 1px #1b1b21; 
+	color: #c1aa12;
+	padding-left: 0.7vw;
+	border-radius: 5px;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.row textarea {
+	resize: none;
+	height: 30vh;
+	width: 40vw;
+	margin-left: 20vw;
+	background-color: #2c2b34;
+	border: solid 1px #1b1b21; 
+	color: #c1aa12;
+	padding-left: 0.7vw;
+	border-radius: 5px;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.row input:focus, textarea:focus {
+	box-shadow: 0px 0px 20px rgba(178, 158, 47, 0.8), 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
