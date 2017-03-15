@@ -3,3 +3,4 @@ from webapp.models import *
 
 admin.site.register(Tournament)
 admin.site.register(UserProfile)
+admin.site.register(Team)

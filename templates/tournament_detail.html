@@ -10,6 +10,7 @@
       <h1>Tournament: {{ tournament.tournament_name}}</h1>
       <h3>Key: {{tournament.tournament_key}}</h3>
       <hr />
+      {% if not tournament.teams_created %}
       <p>
         Players:
         <ul>
@@ -19,10 +20,26 @@
           </li>
           {%endfor%}
         </ul>
+        <p>
+          Teams not set yet. Come back after deadline!
+          {% if main_user == True %}
+          <form method="post" action=".">
+            {%csrf_token%}
+            <input type="submit" name="create_teams" />
+          </form>
+          {% endif %}
+        </p>
+      {% else %}
+        Teams:
+        <ul>
+          {% for team in tournament.teams.all %}
+          <li>
+            {{team.team_name}}
+          </li>
+          {% endfor %}
+        </ul>
       </p>
-      <p>
-        Teams not set yet. Come back after deadline!
-      </p>
+      {% endif %}
       <p>
         {% if request.user == tournament.main_user%}
         <form method="post" action=".">

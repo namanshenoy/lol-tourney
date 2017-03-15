@@ -7,6 +7,7 @@ import requests
 from webapp.models import *
 from django.core.exceptions import *
 import pytz
+import team_generator
 
 # Create your views here.
 
@@ -85,17 +86,18 @@ def get_mmr(user_name):
 		print("MMR is "+str(final_mmr)+" for summoner "+user_name)
 		return final_mmr
 
-def create_teams(request, tournament_id):
-	try:
-		tournament = Tournament.objects.get(id=tournament_id)
-		
-		return True
-	except Exception, e:
-		print e
-		pass
-
-
-	return False
+def tournament_create_teams(request, tournament_id):
+    try:
+        tournament = Tournament.objects.get(id=tournament_id)
+        teams = team_generator.make_teams(tournament.players)
+        tournament.teams.add(*teams)
+        tournament.save()
+        return True
+    except Exception, e:
+        print('Error while Making teams')
+        print str(e)
+        pass
+    return False
 
 def bootstrap_index(request):
 	return render(request, 'bootstrap_test/index.html',)
@@ -159,9 +161,27 @@ def new_tournament_view(request):
 
 
 def tournament_detail_view(request, tournament_id):
-	print 'Tournament Detail View\nTournament id: ' + tournament_id
-	tournament = get_object_or_404(Tournament, id=int(tournament_id))
-	return render(request, 'tournament_detail.html', {'tournament':tournament})
+    context = dict()
+    print 'Tournament Detail View\nTournament id: ' + tournament_id
+    tournament = get_object_or_404(Tournament, id=int(tournament_id))
+
+    if not tournament.teams_created:
+        if request.POST:
+            if 'create_teams' in request.POST:
+                tournament.teams_created = tournament_create_teams(request, tournament_id)
+                print('Teams Made!')
+                tournament.save()
+        context['tournament'] = tournament
+        print 'Here'
+        if (tournament.main_user == request.user):
+            is_main_user = True
+        else:
+            is_main_user = False
+        print is_main_user
+        context['main_user'] = is_main_user
+    else:
+        context['tournament'] = tournament
+    return render(request, 'tournament_detail.html', context=context)
 
 
 def remove_from_tournament(request, tournament_id):

@@ -52,14 +52,24 @@ class UserProfile(models.Model):
 
 
 class Tournament(models.Model):
+    teams_created = models.BooleanField(default=False)
     main_user = models.ForeignKey(User,null=True, blank=True, related_name="main_user")
     tournament_name = models.CharField(max_length=255, blank=True, null=True)
     players = models.ManyToManyField('UserProfile',blank=True, related_name="tournament_players")
     deadline = models.DateTimeField(auto_now_add=True, blank=True)
     tournament_key = models.CharField(max_length=255, blank=True, null=True)
-    teams = models.ForeignKey('Team', null=True, blank=True, related_name="tournament_teams")
+    teams = models.ManyToManyField('Team', null=True, blank=True, related_name="tournament_teams")
+
     def __str__(self):
         return self.tournament_name
+
+    def _get_number_of_teams(self):
+        counter = 0
+        for item in self.teams.all():
+            counter += 1
+        return counter
+
+    number_of_teams = property(_get_number_of_teams)
 
 
 class Team(models.Model):

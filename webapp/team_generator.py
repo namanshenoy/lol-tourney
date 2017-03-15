@@ -1,7 +1,7 @@
 from random import randint
 import time
 import string
-
+from webapp.models import Team
 import random
 
 def randomword(length):
@@ -43,11 +43,14 @@ class Player:
 
 def make_teams(List):
     # List = []
+    print('Making Teams')
     totalMMR = 0
-    totalPlayers = len(List)
+    totalPlayers = 0
+    for player in List.all():
+        totalPlayers +=1
     #rand = randint(50,150)
     #print("Random number = " + str(rand))
-    for player in List:
+    for player in List.all():
         totalMMR += player.lol_mmr
     '''
     for x in range(1, rand+1):
@@ -65,8 +68,9 @@ def make_teams(List):
     for player in subsList:
         print(player.lol_mmr)
     '''
+
     avgMMR = totalMMR / totalPlayers
-    maxPlayersPerPref = int(len(List) / 5)
+    maxPlayersPerPref = int(totalPlayers / 5)
     print('max playersperpref = ' + str(maxPlayersPerPref))
     # list is indexed 0-99
 
@@ -76,7 +80,8 @@ def make_teams(List):
     p4 = []
     p5 = []
     subs = []
-    for item in List:
+
+    for item in List.all():
         if item.primary_role == 1 and len(p1) < maxPlayersPerPref:
             p1.append(item)
         elif item.primary_role == 2 and len(p2) < maxPlayersPerPref:
@@ -266,6 +271,19 @@ def make_teams(List):
     print('Min = team ' + str(minTeam) + ' MMR: ' + str((
                                                         team[minTeam][0].lol_mmr + team[minTeam][1].lol_mmr + team[minTeam][2].lol_mmr +
                                                         team[minTeam][3].lol_mmr + team[minTeam][4].lol_mmr) / 5))
+    counter_t = 0
+    counter_p = 0
+
+    teams_model_list = []
+    for t in range(0, len(team)):
+        temp_team = Team.objects.create(team_name=" Team Name")
+        for p in range(0, 5):
+            temp_team.members.add(team[t][p])
+            print team[t][p].lol_mmr
+        teams_model_list.append(temp_team)
+        temp_team.save()
 
     for sub in subs:
         print(str(sub.lol_mmr))
+
+    return teams_model_list
