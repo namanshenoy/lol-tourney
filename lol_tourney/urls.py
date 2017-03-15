@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.http import HttpResponse
 
 from webapp import views
 
@@ -27,5 +28,5 @@ urlpatterns = [
     url(r'^remove/(?P<tournament_id>[0-9]+)/', views.remove_from_tournament, name='remove_user'),
     url(r'bootstrap/',views.bootstrap_index, name='bootstrap_index'),
     url(r'tournaments/(?P<tournament_id>[0-9]+)/', views.tournament_detail_view, name="tournament_detail"),
-
+    url(r'riot.txt', lambda r:HttpResponse('50d23f43-950d-4a55-ac72-c14325ec166f', content_type='text/plain')),
 ]
