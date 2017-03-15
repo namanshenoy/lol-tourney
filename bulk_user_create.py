@@ -68,6 +68,7 @@ users = [
     ('user_36', 'Naman123', 'user_37@example.com'),
 ]
 
+
 for username, password, email in users:
     try:
         print 'Creating user {0}.'.format(username)

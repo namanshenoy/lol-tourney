@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^remove/(?P<tournament_id>[0-9]+)/', views.remove_from_tournament, name='remove_user'),
     url(r'bootstrap/',views.bootstrap_index, name='bootstrap_index'),
     url(r'tournaments/(?P<tournament_id>[0-9]+)/', views.tournament_detail_view, name="tournament_detail"),
+
 ]

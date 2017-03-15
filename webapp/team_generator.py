@@ -277,13 +277,30 @@ def make_teams(List):
     teams_model_list = []
     for t in range(0, len(team)):
         temp_team = Team.objects.create(team_name=" Team Name")
+        team_mmr = 0
         for p in range(0, 5):
             temp_team.members.add(team[t][p])
             print team[t][p].lol_mmr
-        teams_model_list.append(temp_team)
+            team_mmr += int(team[t][p].lol_mmr)
+        temp_team.ranking = int(team_mmr/5)
         temp_team.save()
+        teams_model_list.append(temp_team)
 
+    teams_model_list.sort(key=lambda x: x.ranking, reverse=True)
+    counter = 1
+
+    for team in teams_model_list:
+        team.team_name = "Team Number " + str(counter)
+        counter += 1
+        team.save()
+
+    sub_team = Team.objects.create(team_name="Substitutes")
     for sub in subs:
         print(str(sub.lol_mmr))
+        sub_team.members.add(sub)
+    sub_team.save()
+    teams_model_list.append(sub_team)
+
+
 
     return teams_model_list

@@ -58,7 +58,8 @@ class Tournament(models.Model):
     players = models.ManyToManyField('UserProfile',blank=True, related_name="tournament_players")
     deadline = models.DateTimeField(auto_now_add=True, blank=True)
     tournament_key = models.CharField(max_length=255, blank=True, null=True)
-    teams = models.ManyToManyField('Team', null=True, blank=True, related_name="tournament_teams")
+    teams = models.ManyToManyField('Team', blank=True, related_name="tournament_teams")
+    bracket_json = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.tournament_name
