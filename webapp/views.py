@@ -112,6 +112,7 @@ def new_tournament_view(request):
 
 	if 'submit_tournament' in request.POST:
 		print ("Submitted new tournament\nPost:\n" + str(request.POST))
+
 		form = TournamentForm(request.POST)
 
 		if form.is_valid():

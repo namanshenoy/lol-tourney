@@ -4,31 +4,39 @@
 <head>
   <meta charset="UTF-8">
   <title>Team Maker</title>
-  <link rel="stylesheet" href="{% static 'css/content.css' %}">
+  <link rel="stylesheet" href="{% static 'css/registration.css' %}">
 </head>
 
 <body style="background-image: url('{% static 'images/background.png' %}')" ;>
   <div id="login_menu">
     <p id="login_text">Login</p>
+
+    
+    <script type="text/javascript">
+      function Redirect() {
+        window.location="{% url 'registration_register' %}";
+      }                                      
+    </script>
+    
     <form id="login_form" method="post" action=".">
       {% csrf_token %}
       <table>
         <tr>
-          <td><input type="text" id="id_username"name="username" placeholder="username" autofocus/></td>
+          <td><input type="text" id="id_username"name="username" class="{%if form.username.errors%}has-error{%endif%}" placeholder="username" autofocus/></td>
         </tr>
         <tr>
           <td><br></td>
         </tr>
         <tr>
-          <td><input type="password" id="id_password" name="password" placeholder="password" /></td>
+          <td><input type="password" id="id_password" name="password" class="{%if form.password.errors%}has-error{%endif%}" placeholder="password" /></td>
         </tr>
          <tr>
           <td><input type="hidden" name="next" value="{{ next }}" /></td>
         </tr>
         <tr>
-          <td><button class="login-button" type="submit" value="submit">
-        SUBMIT
-    </button></td>
+          <td>
+            
+          </td>
         </tr>
 
         <tr>
@@ -39,6 +47,8 @@
        
       </table>
     </form>
+    <button form="login_form" class="login-button" type="submit" value="submit">SUBMIT</button>
+    <button class="register-button" id="register-button" onclick="Redirect()">REGISTER</button>
   </div>
 </body>
 
