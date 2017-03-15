@@ -6,21 +6,17 @@
   <script type="text/javascript" src="{% static 'js/jquery.bracket.min.js'%}"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.bracket.min.css' %}" />
 </head>
-<body>
+<body style="margin-left:2vh;">
   <script type="text/javascript">
       var minimalData = {
           teams : [
             ["Team 1", "Team 2"], /* first matchup */
             ["Team 3", "Team 4"],  /* second matchup */
             ["Team 5", "Team 6"],
-            ["Team 7", "Team 8"],
-            ["Team 9", "Team 10"],
-            ["Team 11", "Team 12"],
-            ["Team 13", "Team 14"],
-            ["Team 15", null]
+            ["Team 7", null],
           ],
           results : [
-            [[4,3,'Match 1'], [3,4], , [1,3]],       /* first round */
+            [[4,3,'Match 1']],       /* first round */
             [[4,6], [2,1]]        /* second round */
           ]
         }
@@ -33,16 +29,28 @@
   </script>
   <div class="container-fluid">
     {% include 'navbar.html'%}
+    <div class="row">
     <div class="col-md-12">
 
       <h1>Tournament: {{ tournament.tournament_name}}</h1>
       <h3>Key: {{tournament.tournament_key}}</h3>
       <hr />
-      <div id="minimal" >
+      <div id="minimal" class="col-md-7">
         <div class="demo">
 
         </div>
       </div>
+      <div class="col-md-5">
+        Tips for moderators:
+        <ol>
+          <li>Please refresh page before submitting a new score. This is to avoid one score-set overlapping another.</li>
+          <li>Before creating a tournament, make sure the number of possible teams are divisible by 4.</li>
+          <li>If the number of teams is in the order of '4n + 1', the last team will have an unfair advantage. Meaning, don't let there be 5,9,13,... teams</li>
+          <li>'4n - 1' teams will cause one team to pass to the second round by default. If teams are seeded, this will be the best team.</li>
+        </ol>
+      </div>
+    </div>
+    </div>
       {% if not tournament.teams_created %}
       <p>
         Players:
