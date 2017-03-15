@@ -25,8 +25,6 @@ SECRET_KEY = '7o#%9j)2ea5w02&0%upm1ra^z@m23n%e!!61alzs+9%111eqxx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -130,4 +128,6 @@ ACCOUNT_ACTIVATION_DAYS = 7     # One-week activation window; you may, of course
 REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logged in.
 LOGIN_REDIRECT_URL = '/'  # The page you want users to arrive at after they successful log in
 LOGIN_URL = '/accounts/login/'  # The page users are directed to if they are not logged in,
-                                                                # and are trying to access pages requiring authenticatio
+                                                                # and are trying to access pages requiring authentication
+
+from settings_secret import *

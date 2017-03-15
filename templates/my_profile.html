@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+  <title>LolTourney|My Profile</title>
+  {%include 'head.html'%}
+
+</head>
+<body>
+  <div class="container-fluid">
+    {% include 'navbar.html'%}
+    <div class="col-md-6">
+      <h1>{{profile.user.first_name}}'s Settings</h1><br />
+
+      <hr />
+      {{ user_profile_notification }}
+      <form method="post" action=".">
+        {% csrf_token %}
+        <p>
+          <strong>Notes:</strong><br />
+          If you choose the same option twice, your probability of being filled increases
+          <br />You have a higher chance of getting your primary role if you join the tournaments earlier
+          <br /><br />
+          <table>
+          <label for="id_lol_summoner_name">Lol summoner name:</label>
+          <input id="id_lol_summoner_name" maxlength="255" value="{{profile.lol_summoner_name}}" name="lol_summoner_name" type="text">
+          <br />
+          <label for="id_primary_role">Your first choice:</label>
+          <select id="id_primary_role" name="primary_role">
+            <option {% if profile.primary_role == 0 %}selected="selected"{% endif %} value="0">Fill</option>
+            <option {% if profile.primary_role == 1 %}selected="selected"{% endif %} value="1">Top</option>
+            <option {% if profile.primary_role == 2 %}selected="selected"{% endif %} value="2">Jungle</option>
+            <option {% if profile.primary_role == 3 %}selected="selected"{% endif %} value="3">Mid</option>
+            <option {% if profile.primary_role == 4 %}selected="selected"{% endif %} value="4">Bottom</option>
+            <option {% if profile.primary_role == 5 %}selected="selected"{% endif %} value="5">Support</option>
+          </select>
+          <br />
+          <label for="id_secondary_role">Your second choice:</label>
+          <select id="id_secondary_role" name="secondary_role">
+            <option {% if profile.secondary_role == 0 %}selected="selected"{% endif %} value="0">Fill</option>
+            <option {% if profile.secondary_role == 1 %}selected="selected"{% endif %} value="1">Top</option>
+            <option {% if profile.secondary_role == 2 %}selected="selected"{% endif %} value="2">Jungle</option>
+            <option {% if profile.secondary_role == 3 %}selected="selected"{% endif %} value="3">Mid</option>
+            <option {% if profile.secondary_role == 4 %}selected="selected"{% endif %} value="4">Bottom</option>
+            <option {% if profile.secondary_role == 5 %}selected="selected"{% endif %} value="5">Support</option>
+          </select>
+          <p>
+            Your current summoner name: {{profile.lol_summoner_name}}<br />
+            {% if request.user.is_superuser %}Your MMR: {{profile.lol_mmr}}{%endif%}
+          </p>
+        </p>
+        <input type="submit" value="submit"/>
+      </table>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <p>
+        <h1>My Tournaments:</h1>
+        <br />
+        <hr />
+        <ul>
+          {% for tournament in tournaments reversed %}
+          <li>
+            <a href="{% url 'tournament_detail' tournament_id=tournament.id %}">{{tournament}}</a>
+          </li>
+          {%endfor%}
+        </ul>
+      </p>
+    </div>
+  </div>
+</body>

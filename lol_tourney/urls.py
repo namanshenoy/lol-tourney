@@ -19,9 +19,13 @@ from django.contrib import admin
 from webapp import views
 
 urlpatterns = [
-	url(r'^$', views.home, name='home'),
-	url(r'^home/', views.index, name='index'),
-	url(r'^settings/', views.settings, name='settings'),
 	url(r'^admin/', admin.site.urls),
 	url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^$', views.home, name="index"),
+    url(r'^tournaments/$', views.new_tournament_view, name="new_tournament"),
+    url(r'^profile/$', views.user_profile_view, name="user_profile"),
+    url(r'^remove/(?P<tournament_id>[0-9]+)/', views.remove_from_tournament, name='remove_user'),
+    url(r'bootstrap/',views.bootstrap_index, name='bootstrap_index'),
+    url(r'tournaments/(?P<tournament_id>[0-9]+)/', views.tournament_detail_view, name="tournament_detail"),
+
 ]
