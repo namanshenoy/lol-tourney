@@ -44,7 +44,7 @@
           </select>
           <p>
             Your current summoner name: {{profile.lol_summoner_name}}<br />
-            {% if request.user.is_superuser %}Your MMR: {{profile.lol_mmr}}{%endif}
+            {% if request.user.is_superuser %}Your MMR: {{profile.lol_mmr}}{%endif%}
           </p>
         </p>
         <input type="submit" value="submit"/>
