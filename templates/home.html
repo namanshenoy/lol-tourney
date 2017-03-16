@@ -1,18 +1,40 @@
 <!DOCTYPE html>
 
+{% load static %}
+
 <head>
   <title>LolTourney | Home</title>
   {%include 'head.html'%}
 
 </head>
-<body>
+<body style="background-image: url('{% static 'images/background.png' %}')";>
   <div class="container-fluid">
     {% include 'navbar.html'%}
     <br />
     <br />
-    <p>
+    <!--<p>
       Social stuff will be here!<br />
       Maybe blogs and stuff.
-    </p>
+    </p>-->
+    <div id="main-container">
+      <div id="featured-post">
+        <img id="featured-image" src="https://i.ytimg.com/vi/OkWZ48mmRTg/maxresdefault.jpg">
+        <p id="featured-title">UPDATE: New Options in v1.6</p>
+        <p id="featured-details">this is where descriptions would go for new updates and they would be shown here blah filler filler blah slide thru more stuff w arrow icon new updates and they would be shown here blah filler filler blah slide thru more stuff w arrow icon new updates and they would </p>
+      </div>
+      <div id="my-events">
+        <p id="side-title">My Events</p>
+        <p class="event">UMass esports finals</p>
+        <p class="event">dubcats tourney</p>
+      </div>
+      <div id="upcoming">
+        <p id="side-title">Upcoming</p>
+        <p class="event">UMass esports finals</p>
+        <p class="event">dubcats tourney</p>
+      </div>
+      <div id="featured-tournament">
+        <p id="side-title">UMass esports finals</p>
+      </div>
+    </div>
   </div>
 </body>

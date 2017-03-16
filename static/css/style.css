@@ -1,1 +1,114 @@
-# Empty CSS file for your own CSS
+@font-face {
+  font-family: 'league';
+  src: url('../fonts/league.ttf');
+}
+
+body {
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.navbar {
+  margin-left: 20vw;
+  margin-right: 20vw;
+}
+
+#main-container {
+  position: absolute;
+  left: 20vw;
+  width: 60vw;
+  height: 94.2vh;
+  margin-top: -3.1vh;
+  background-color: #3f3e50; 
+  box-shadow: 0px 0px 50px rgba(178, 158, 47, 0.8);
+  background: rgba(63, 62, 80, 0.9);
+}
+
+#featured-post {
+  width: 57vw;
+  height: 12.7vw;
+  margin: auto;
+  margin-top: 2vh;
+  border-radius: 0.3vw;
+  background-color: rgba(35, 33, 59, 0.75);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+  border: solid 1px #181633;
+}
+
+#featured-image {
+  position: absolute;
+  width: 20vw;
+  height: auto;
+  margin-left: 1vw;
+  margin-top: 0.6vw;
+  box-shadow: 0px 0px 10px rgba(178, 158, 47, 0.8);
+}
+
+#featured-title {
+  margin-left: 22vw;
+  margin-top: 0vh;
+  color: #b29e2f;
+  font-family: 'league';
+  font-size: 2vw;
+  text-shadow: 2px 2px 10px black;
+}
+
+#featured-details {
+  margin-left: 22vw;
+  margin-top: 0vh;
+  color: #909090;
+  font-family: 'league';
+  font-size: 1vw;
+  text-shadow: 2px 2px 10px black;
+}
+
+#my-events {
+  font-family: 'league';
+  width: 15vw;
+  height: 20vh;
+  margin-top: 1vh;
+  margin-left: 1.56vw;
+  border-radius: 0.3vw;
+  background-color: rgba(35, 33, 59, 0.75);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+  border: solid 1px #181633;
+}
+
+#upcoming {
+  font-family: 'league';
+  width: 15vw;
+  height: 44vh;
+  margin-top: 1vh;
+  margin-left: 1.56vw;
+  border-radius: 0.3vw;
+  background-color: rgba(35, 33, 59, 0.75);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+  border: solid 1px #181633;
+}
+
+#side-title {
+  margin-top: 0vh;
+  margin-left: 0.8vw;
+  color: #b29e2f;
+  font-size: 2vw;
+  text-shadow: 2px 2px 10px black;
+}
+
+.event {
+  margin-left: 0.8vw;
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 1vw;
+}
+
+#featured-tournament {
+  margin-top: -64.8vh;
+  margin-left: 17.5vw;
+  width: 41vw;
+  background-color: rgba(35, 33, 59, 0.75);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 0.3vw;
+  height: 64.8vh;
+  border: solid 1px #181633;
+}
