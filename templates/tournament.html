@@ -14,6 +14,7 @@
         {{tournament_notification}}<br />
         <strong>Register for tournament here :</strong>
         <br />
+        {% if request.user.is_authenticated %}
         <form method="post" action=".">
           {% csrf_token %}
           <h4>Join Tournament</h4>
@@ -29,6 +30,11 @@
           <input type="submit" name="submit_tournament" value="submit"/>
         </form>
       </p>
+      {%else%}
+      <p>
+        Please Login to create or join tournaments!
+      </p>
+      {%endif%}
       <hr />
       <h3>Available tournaments:</h3>
       <table class="table table-striped table-bordered">
