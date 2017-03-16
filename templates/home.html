@@ -2,9 +2,17 @@
 
 <head>
   <title>LolTourney | Home</title>
+  {%include 'head.html'%}
+
 </head>
 <body>
-  <p>
-    <a href="#">Home</a>&nbsp;<a href="{% url 'new_tournament' %}">Tournaments</a>&nbsp;{%if not request.user.is_authenticated%}<a href="{% url 'registration_register' %}">Login</a>&nbsp;{% else %}<a href="{% url 'user_profile' %}">My Profile</a>&nbsp;{%endif%}
-  </p>
+  <div class="container-fluid">
+    {% include 'navbar.html'%}
+    <br />
+    <br />
+    <p>
+      Social stuff will be here!<br />
+      Maybe blogs and stuff.
+    </p>
+  </div>
 </body>
