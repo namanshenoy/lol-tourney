@@ -13,14 +13,14 @@ import team_generator
 
 def text_to_mmr(text):
     return {
-        'Bronze': 1000,
-        'Silver': 1150,
+		'Bronze': 1000,
+		'Silver': 1150,
 		'Gold': 1500,
 		'Platinum': 1850,
 		'Diamond': 2200,
 		'Master': 2700,
 		'Challenger': 2900
-    }[text]
+	}[text]
 
 
 def get_mmr(user_name):
@@ -87,17 +87,17 @@ def get_mmr(user_name):
 		return final_mmr
 
 def tournament_create_teams(request, tournament_id):
-    try:
-        tournament = Tournament.objects.get(id=tournament_id)
-        teams = team_generator.make_teams(tournament.players)
-        tournament.teams.add(*teams)
-        tournament.save()
-        return True
-    except Exception, e:
-        print('Error while Making teams')
-        print str(e)
-        pass
-    return False
+	try:
+		tournament = Tournament.objects.get(id=tournament_id)
+		teams = team_generator.make_teams(tournament.players)
+		tournament.teams.add(*teams)
+		tournament.save()
+		return True
+	except Exception, e:
+		print('Error while Making teams')
+		print str(e)
+		pass
+		return False
 
 def bootstrap_index(request):
 	return render(request, 'bootstrap_test/index.html',)
@@ -130,7 +130,13 @@ def new_tournament_view(request):
 				pass
 			submitted_tournament_id = request.POST.get('tournament_id')
 			tournament = None
-			tournament = Tournament.objects.get(id=int(request.POST.get('tournament_id')))
+			try:
+				tournament = Tournament.objects.get(id=int(request.POST.get('tournament_id')))
+			except ValueError:
+				print "Wrong tournament"
+				context['tournament_notification'] = 'Please enter a correct tournament number'
+				pass
+
 			if user_profile.lol_mmr == None or user_profile.lol_mmr == 0:
 				raise ValueError
 			if tournament.tournament_key == str(request.POST.get('tournament_key')):
@@ -146,14 +152,13 @@ def new_tournament_view(request):
 		except ValueError:
 			print "User has no profile"
 			context['tournament_notification'] = 'You have not set a valid summoner name. Please check!'
-
+			print "HI!"
 		except Exception, e:
 			context['tournament_notification'] = 'Tournament ID is a number. Please try again'
 			print e
 			pass
 	else:
 		form = TournamentForm()
-
 	tournaments = Tournament.objects.all()
 	context['tournaments'] = tournaments
 	context['form'] = form
