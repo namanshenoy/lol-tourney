@@ -105,7 +105,7 @@ def bootstrap_index(request):
 def home(request):
 	if request.POST:
 		submitted = Submitted.objects.create(name=request.POST.get('response_id'))
-	contextDict = []
+	contextDict = dict()
 	return_survey = Submitted.objects.all()
 	contextDict['return_survey'] = return_survey
 	return render(request, 'home.html', contextDict)
