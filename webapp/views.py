@@ -105,7 +105,7 @@ def bootstrap_index(request):
 def home(request):
 	if request.POST:
 		submitted = Submitted.objects.create(name=request.POST.get('response_id')
-	return render(request, 'home.html', {'return_survey': Submitted.objects.all()})
+	return render(request, 'home.html', context={'return_survey': Submitted.objects.all()})
 
 def new_tournament_view(request):
 	context = dict()
