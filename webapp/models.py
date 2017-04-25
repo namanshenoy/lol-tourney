@@ -49,7 +49,7 @@ class UserProfile(models.Model):
     primary_role_name = property(_get_primary_role)
     secondary_role_name = property(_get_secondary_role)
 
-def Submitted(models.Model):
+class Submitted(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     
 
