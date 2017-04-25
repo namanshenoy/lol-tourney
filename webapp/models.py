@@ -7,7 +7,6 @@ from registration.signals import user_registered
 from django.db import models
 
 # Create your models here.
-
 def user_created(sender, user, request, **kwargs):
     user.first_name=request.POST.get('first_name')
     user.last_name=request.POST.get('last_name')
@@ -50,6 +49,9 @@ class UserProfile(models.Model):
     primary_role_name = property(_get_primary_role)
     secondary_role_name = property(_get_secondary_role)
 
+def Submitted(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
+    
 
 class Tournament(models.Model):
     teams_created = models.BooleanField(default=False)
