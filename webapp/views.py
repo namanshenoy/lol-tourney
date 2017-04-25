@@ -112,7 +112,7 @@ def home(request):
 	contextDict = dict()
 	return_survey = Submitted.objects.all()
 	contextDict['return_survey'] = return_survey
-	return render(request, 'home.html', contextDict)
+	return render(request, 'home.html', context=contextDict)
 
 def new_tournament_view(request):
 	context = dict()
