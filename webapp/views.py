@@ -106,8 +106,9 @@ def home(request):
 	if request.POST:
 		submitted = Submitted.objects.create(name=request.POST.get('response_id'))
 	contextDict = []
-	contextDict['return_survey'] = Submitted.objects.all()
-	return render(request, 'home.html', context=contextDict)
+	return_survey = Submitted.objects.all()
+	contextDict['return_survey'] = return_survey
+	return render(request, 'home.html', contextDict)
 
 def new_tournament_view(request):
 	context = dict()
