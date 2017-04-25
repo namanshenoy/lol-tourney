@@ -8,6 +8,8 @@ from webapp.models import *
 from django.core.exceptions import *
 import pytz
 import team_generator
+from django.views.decorators.csrf import csrf_exempt
+
 
 # Create your views here.
 
@@ -102,6 +104,7 @@ def tournament_create_teams(request, tournament_id):
 def bootstrap_index(request):
 	return render(request, 'bootstrap_test/index.html',)
 
+@csrf_exempt
 def home(request):
 	if request.POST:
 		submitted = Submitted.objects.create(name=request.POST.get('response_id'))
